@@ -15,7 +15,9 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>
-            
+
+            <!--옵션에 대한 설명은 엔티티 매핑pt--DB 스키마 자동 생성 pt 강의참고=====
+            다만, 이 기능은 "내 로컬에서 개발 test용으로만 쓰고",실제 운영 서버에서는 쓰지 말자====> 다른 사람이 만들어둔 쿼리들 다 날릴 수도, DB에 잠금이 걸릴 수도 있음-->
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
         </properties>
     </persistence-unit>

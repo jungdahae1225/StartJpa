@@ -30,7 +30,7 @@ public class JpaMain {
             member.setName("HelloA");
 
             /** 탐색
-                //==DB에 저장된 정보 탐색(찾기).==//
+                //==DB에 저장된 정보 탐색(찾기). 찾고 -> remove ==//
                 Member findMember = entityManager.find(Member.class,1L); //첫번째 인자 = 엔티티 클래스 & 두번째인자 = 기본키
                 findMember.getId(); //인자로 넘겨준 기본키를 바탕으로 ID를 찾아줄거임.
                 findMember.getName();
@@ -40,16 +40,18 @@ public class JpaMain {
 
             /**
              * Member findMember = entityManager.find(Member.class,1L);
-             * findMember.setName("수정할 이름");
+             * findMember.setName("수정할 이름"); (JPA는 JAVA 컬렉션을 쓰는 것 같은 효과를 얻게 해준다.)
              *
-             * entityManager.persist(member); <=이거 다시 안해줘도 됨. 위의 두줄로 수정 끝!
+             * entityManager.persist(member); <=이거 다시 안해줘도 됨!! 위의 두줄로 수정 끝!
              * (이미 한 번 jpa에 저장이 됐으면 jpa가 이미 저장해서 가지고 있기 때문에 알아서 수정 업데이트 해준다.)
              */
 
-            //==jpa의 .persist()문법을 써서 DB에 저장할 객체를 넘겨주면 끝.==//
+            //==jpa의 .persist()문법을 써서 영속 시켜주면 끝.==//
             entityManager.persist(member);
+            //entityManager.detach(member); 준영속성 상태로 만들기
 
-            /**==jpa 저장 행위가 끝난 후 트랜젝션 커밋으로 트랜젝션 단위 끝내기 , 변경을 했다면 꼭 트랜젝션 커밋해야한다.==**/
+            /**==jpa 저장 행위가 끝난 후 트랜젝션 커밋으로 트랜젝션 단위 끝내기.
+             * 변경을 했다면 꼭 트랜젝션 커밋 해야한다. -> 그래야 영속성 컨텍스트_쓰기 지연 SQL 저장소 안에 있던 DB에 쿼리가 날라가게 됨(JPA용어로 이를 flush라고 한다.) ==**/
             transaction.commit();
         }catch (Exception e){
             //문제가 발생 하면 catch문에서 예외처리로 트랜젝션 롤백해주기.
