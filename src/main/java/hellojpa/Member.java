@@ -9,6 +9,7 @@ import java.util.Date;
 //@Table(name = "DB에는 Member(클래스 이름)과 다르게 테이블 명으로 설정되어 있을 때 이곳에 테이블 이름을 수동으로 작성해주면 됨.")
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //현재 DB의 항목들과 맞추어 만들어주면 됨.: 현재 DB에 id와 name컬럼을 만들어 두었으니까.
     private Long id;
 

@@ -46,7 +46,9 @@ public class JpaMain {
              * (이미 한 번 jpa에 저장이 됐으면 jpa가 이미 저장해서 가지고 있기 때문에 알아서 수정 업데이트 해준다.)
              */
 
-            //==jpa의 .persist()문법을 써서 영속 시켜주면 끝.==//
+            //==jpa의 .persist()문법을 써서 영속 시켜주면 끝. 이때 꼭!!! PK가 설정 되어있어야 한다.==//
+            /**===기본 키 매핑 전략을 @GeneratedValue(strategy = GenerationType.IDENTITY)로 했을 경우는 DB에 저장 할 때 임의로 설정된 기본키를 알아야
+            영속성 컨텍스트에 저장을 할 수 있으므로 이 경우에만 persist 하자 마자 DB쿼리를 날린다.====**/
             entityManager.persist(member);
             //entityManager.detach(member); 준영속성 상태로 만들기
 
